@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Student Detail Page</title>
+{% endblock %}
+
+{% block content %}
+
+
+{% for detail in student %}
+
+
+
+
+<div class="row g-1">
+    <div class="col-sm-12 col-lg-2 d-flex flex-column align-items-center justify-content-around p-1 light-indigo">
+
+        <img src="{{ url_for('static', filename='images/' + detail.img_path) }}" alt="profildetail pic" class="img-fluid w-75 mt-2">
+
+        <div class="d-flex flex-column align-items-center justify-content-around">
+            <h5 class="text-light fw-bold py-2 text-center">{{ detail.firstname }} {{ detail.lastname }}</h5>
+    
+            <button class="btn btn-md btn-primary w-100  text-center" disabled>{{ detail.status }}</button>
+        </div>
+
+    </div>
+
+    <div class="col-sm-12 col-lg-7">
+        <h3 class="indigo text-light p-3">Personal Information</h3>
+        <div class="container-fluid lead">
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <span class="fw-bold">Email: </span>{{ detail.email }}
+                </li>
+                <li class="list-group-item">
+                    <span class="fw-bold">Phone Number: </span>{{ detail.phone }}
+                </li>
+                <li class="list-group-item">
+                    <span class="fw-bold">Gender: </span>{{ detail.gender }}
+                </li>
+                <li class="list-group-item">
+                    <span class="fw-bold">Date Of Birth: </span>{{ detail.dob }}
+                </li>
+                <li class="list-group-item">
+                    <span class="fw-bold">Address: </span>{{ detail.address }}
+                </li>
+              </ul>
+            
+        </div>
+    </div>
+    <div class="col-sm-0 col-lg-3"></div>
+</div>
+
+<div class="row p-3">
+    <h3 class="indigo text-light p-3">Other Information</h3>
+    <div class="col-sm-5 col-md-3 p-3 lead">
+        <span class="fw-bold">State Of Origin: </span>{{ detail.state }} 
+    </div>
+    <div class="col-sm-5 col-md-3 p-3 lead">
+        <span class="fw-bold">Local Govt: </span>{{ detail.lga }} </div>
+    <div class="col-sm-2 col-md-6"></div>
+</div>
+
+
+
+<div class="container-fluid pb-5">
+    <div class="row mb-5 gy-3">
+        <h3 class="indigo text-light p-3">Academic Related Information</h3>
+        <div class="col-4 col-md-3 p-1 lead">
+            <span class="fw-bold">Next Of Kin: </span>{{ detail.kin }} 
+        </div>
+        <div class="col-4 col-md-2 p-1 lead">
+            <span class="fw-bold">Jamb Score: </span>{{ detail.jamb }} 
+        </div>
+        <div class="col-4 col-md-3 p-1 lead">
+            <span class="fw-bold">Status: </span><span id="statusEl">{{ detail.status }}</span> 
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <form action="javascript:0" method="POST" id="statusForm">
+    
+                <div class="form-group d-flex flex-row align-items-center justify-content-center pt-3 lead">
+                    <input type="text" name="studentId" value="{{ detail.student_id }}" class="d-none">
+    
+                    <label for="status text-nowrap form-select-label"> <span class="fw-bold">Change Status: </span></label>
+    
+                    <select name="status" id="status" class="form-select form-select-md w-50">
+                        <option selected="true" disabled>Change Status</option>
+                        <option value="undecided">undecided</option>
+                        <option value="admitted">admitted</option>
+                    </select>
+    
+                </div>
+    
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+{% endfor %}
+
+
+{% endblock %}
+

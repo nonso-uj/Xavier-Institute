@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Portal Form Page</title>
+{% endblock %}
+
+
+
+{% block addStudentsActive %} active {% endblock %}
+
+
+
+
+{% block content %}
+
+
+<div class="container">
+    <h1 class="text-center">Student Portal Information</h1>
+
+    
+    <p><i class="text-danger">Please fill in all required information</i></p>
+    
+    <div class="bg-secondary p-1"><h4 class="text-light">Personal Information</h4></div>
+
+    <form action="{{ url_for('portalHandler') }}" id="portalForm" method="POST" enctype="multipart/form-data">
+            
+            <div class="row p-2 gy-3 fs-5">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="image" class="form-label">Image Upload: </label>
+                        <input type="file" name="image" id="image" class="form-control" accept="image/*">
+                    </div>
+                </div>
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label" for="firstname">FirstName: </label>
+                        <input type="text" name="firstname" id="firstname" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label" for="middlename">MiddleName: </label>
+                        <input type="text" name="middlename" id="middlename" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label" for="lastname">LastName : </label>
+                        <input type="text" name="lastname" id="lastname" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email: </label>
+                        <input type="email" name="email" id="email" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label" for="dob">Date Of Birth: </label>
+                        <input type="date" name="dob" id="dob" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6 p-4">
+                    <div class="form-group">
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="gender" id="male" value="male" class="form-check-input">
+                            <label class="form-label" for="male" class="form-check-label">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" name="gender" id="female" value="female" class="form-check-input">
+                            <label class="form-label" for="female" class="form-check-label">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Phone Number: </label>
+                        <input type="number" name="phone" id="phone" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label" for="address">Address: </label>
+                        <textarea name="address" id="address" cols="30" rows="2" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label" for="state">State of Origin: </label>
+                        <select name="state" id="state" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label" for="lga">Local Government: </label>
+                        <select name="lga" id="lga" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label" for="kin">Next of Kin: </label>
+                        <input type="text" name="kin" id="kin" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6"></div>
+
+                <div class="col-12 bg-secondary text-light mt-5 p-1">
+                    <h4>Academics Related Information</h4>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label" for="jamb">Jamb Score: </label>
+                        <input type="number" name="jamb" id="jamb" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6"></div>
+
+                <div class="col-12 my-5 text-center">
+                    <input type="submit" value="submit" class="form-control btn btn-lg btn-secondary w-25">
+                </div>
+
+
+            </div>
+
+    </form>
+
+</div>
+
+
+{% endblock %}
+
