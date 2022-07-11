@@ -1,23 +1,27 @@
 from flask import Flask, redirect, render_template, url_for, request, current_app, flash
-from flaskext.mysql import MySQL
-import datetime
-import pymysql.cursors
-import json
-import os
+import datetime, json, os, psycopg2
+from whitenoise import WhiteNoise
+from decouple import config
 
 
 
 app = Flask(__name__)
+app.wsgi_app = WhiteNoise(app.wsgi_app, root="static/")
+app.secret_key = config('SECRET_KEY')
 
 
-app.secret_key = 'secret'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.config['MYSQL_DATABASE_DB'] = 'students'
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'nonso@Arch1'
+def get_db_connection():
+    conn = psycopg2.connect(
+        host=config('DB_HOST'),
+        database=config('DB_NAME'),
+        user=config('DB_USER'),
+        password=config('DB_PASSWORD'),
+        port=config('DB_PORT')
+    )
+    return conn
 
 
-mysql = MySQL(app, cursorclass=pymysql.cursors.DictCursor)
+
 
 
 
@@ -54,9 +58,9 @@ def portalHandler():
             name = firstname + '_' + lastname + '_' + image.filename
             filepath = os.path.join(current_app.root_path, 'static/images/' + name)
             image.save(filepath)
-            conn = mysql.get_db()
+            conn = get_db_connection()
             cur = conn.cursor()
-            cur.execute('insert into details(firstname, middlename, lastname, email, dob, gender, phone, address, state, lga, kin, jamb, img_path) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (firstname, middlename, lastname, email, dob, gender, phone, address, state, lga, kin, jamb, name))
+            cur.execute('insert into students(firstname, middlename, lastname, email, dob, gender, phone, address, state, lga, kin, jamb, img_path) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (firstname, middlename, lastname, email, dob, gender, phone, address, state, lga, kin, jamb, name))
             conn.commit()
             cur.close()
         else:
@@ -82,9 +86,9 @@ def search():
         jamb = request.form.get('searchJamb') or None
 
         if name or status or gender or jamb:
-            conn = mysql.get_db()
+            conn = get_db_connection()
             cur = conn.cursor()
-            cur.execute('select * from details where firstname like %s or firstname is null or middlename like %s or middlename is null or lastname like %s or lastname is null or status like %s or status is null or gender like %s or gender is null or jamb like %s or jamb is null', (name, name, name, status, gender, jamb))
+            cur.execute('select * from students where firstname like %s or firstname is null or middlename like %s or middlename is null or lastname like %s or lastname is null or status like %s or status is null or gender like %s or gender is null or jamb like %s or jamb is null', (name, name, name, status, gender, jamb))
             rv = cur.fetchall()
             students = rv
         else:
@@ -98,9 +102,9 @@ def search():
 @app.route('/index')
 def index():
 
-    conn = mysql.get_db()
+    conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('select * from details')
+    cur.execute('select * from students')
     rv = cur.fetchall()
     students = rv
 
@@ -112,9 +116,9 @@ def detail():
     student = ''
     details = request.form['id']
     if request.method == 'POST':
-        conn = mysql.get_db()
+        conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('select * from details where student_id=%s', (details))
+        cur.execute('select * from students where student_id=%s', (details, ))
         rv = cur.fetchall()
         student = rv
 
@@ -129,9 +133,9 @@ def changeStatus():
     id = req['id']
 
     if request.method == 'POST':
-        conn = mysql.get_db()
+        conn = get_db_connection()
         cur = conn.cursor()
-        cur.execute('update details set status=%s where student_id=%s', (status, id))
+        cur.execute('update students set status=%s where student_id=%s', (status, id))
         conn.commit()
         cur.close()
 

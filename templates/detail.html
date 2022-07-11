@@ -15,12 +15,12 @@
 <div class="row g-1">
     <div class="col-sm-12 col-lg-2 d-flex flex-column align-items-center justify-content-around p-1 light-indigo">
 
-        <img src="{{ url_for('static', filename='images/' + detail.img_path) }}" alt="profildetail pic" class="img-fluid w-75 mt-2">
+        <img src="{{ url_for('static', filename='images/' + detail[12]) }}" alt="profildetail pic" class="img-fluid w-75 mt-2">
 
         <div class="d-flex flex-column align-items-center justify-content-around">
-            <h5 class="text-light fw-bold py-2 text-center">{{ detail.firstname }} {{ detail.lastname }}</h5>
+            <h5 class="text-light fw-bold py-2 text-center">{{ detail[1] }} {{ detail[3] }}</h5>
     
-            <button class="btn btn-md btn-primary w-100  text-center" disabled>{{ detail.status }}</button>
+            <button class="btn btn-md btn-primary w-100  text-center" disabled>{{ detail[13] }}</button>
         </div>
 
     </div>
@@ -31,19 +31,19 @@
 
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                    <span class="fw-bold">Email: </span>{{ detail.email }}
+                    <span class="fw-bold">Email: </span>{{ detail[4] }}
                 </li>
                 <li class="list-group-item">
-                    <span class="fw-bold">Phone Number: </span>{{ detail.phone }}
+                    <span class="fw-bold">Phone Number: </span>{{ detail[7] }}
                 </li>
                 <li class="list-group-item">
-                    <span class="fw-bold">Gender: </span>{{ detail.gender }}
+                    <span class="fw-bold">Gender: </span>{{ detail[6] }}
                 </li>
                 <li class="list-group-item">
-                    <span class="fw-bold">Date Of Birth: </span>{{ detail.dob }}
+                    <span class="fw-bold">Date Of Birth: </span>{{ detail[5] }}
                 </li>
                 <li class="list-group-item">
-                    <span class="fw-bold">Address: </span>{{ detail.address }}
+                    <span class="fw-bold">Address: </span>{{ detail[8] }}
                 </li>
               </ul>
             
@@ -55,10 +55,10 @@
 <div class="row p-3">
     <h3 class="indigo text-light p-3">Other Information</h3>
     <div class="col-sm-5 col-md-3 p-3 lead">
-        <span class="fw-bold">State Of Origin: </span>{{ detail.state }} 
+        <span class="fw-bold">State Of Origin: </span>{{ detail[9] }} 
     </div>
     <div class="col-sm-5 col-md-3 p-3 lead">
-        <span class="fw-bold">Local Govt: </span>{{ detail.lga }} </div>
+        <span class="fw-bold">Local Govt: </span>{{ detail[10] }} </div>
     <div class="col-sm-2 col-md-6"></div>
 </div>
 
@@ -68,19 +68,19 @@
     <div class="row mb-5 gy-3">
         <h3 class="indigo text-light p-3">Academic Related Information</h3>
         <div class="col-4 col-md-3 p-1 lead">
-            <span class="fw-bold">Next Of Kin: </span>{{ detail.kin }} 
+            <span class="fw-bold">Next Of Kin: </span>{{ detail[14] }} 
         </div>
         <div class="col-4 col-md-2 p-1 lead">
-            <span class="fw-bold">Jamb Score: </span>{{ detail.jamb }} 
+            <span class="fw-bold">Jamb Score: </span>{{ detail[11] }} 
         </div>
         <div class="col-4 col-md-3 p-1 lead">
-            <span class="fw-bold">Status: </span><span id="statusEl">{{ detail.status }}</span> 
+            <span class="fw-bold">Status: </span><span id="statusEl">{{ detail[13] }}</span> 
         </div>
         <div class="col-sm-12 col-md-4">
             <form action="javascript:0" method="POST" id="statusForm">
     
                 <div class="form-group d-flex flex-row align-items-center justify-content-center pt-3 lead">
-                    <input type="text" name="studentId" value="{{ detail.student_id }}" class="d-none">
+                    <input type="text" name="studentId" value="{{ detail[0] }}" class="d-none">
     
                     <label for="status text-nowrap form-select-label"> <span class="fw-bold">Change Status: </span></label>
     
