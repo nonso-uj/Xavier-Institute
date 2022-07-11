@@ -88,7 +88,7 @@ def search():
         if name or status or gender or jamb:
             conn = get_db_connection()
             cur = conn.cursor()
-            cur.execute('select * from students where firstname like %s or firstname is null or middlename like %s or middlename is null or lastname like %s or lastname is null or status like %s or status is null or gender like %s or gender is null or jamb like %s or jamb is null', (name, name, name, status, gender, jamb))
+            cur.execute('select * from students where firstname like %s or firstname is null or middlename like %s or middlename is null or lastname like %s or lastname is null or status like %s or status is null or gender like %s or gender is null or jamb like %s or jamb is null order by student_id', (name, name, name, status, gender, jamb))
             rv = cur.fetchall()
             students = rv
         else:
@@ -104,7 +104,7 @@ def index():
 
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute('select * from students')
+    cur.execute('select * from students order by student_id')
     rv = cur.fetchall()
     students = rv
 
