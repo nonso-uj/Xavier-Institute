@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Marlian Academy</title>
+{% endblock %}
+
+{% block homeActive %} active {% endblock %}
+
+{% block content %}
+
+
+<div class="row p-3 home-body">
+    <div class="col-md-6 text-center pt-6 d-flex flex-column align-items-center justify-content-center p-5" id="change-height">
+
+        <h1 class=" display-4 fw-bold align-middle align-self-center mb-4">Student Main Portal</h1>
+
+        <h5 class="text-start px-3 mb-2 text-warning homeText">Ustacky Student Portal registration join us today for your online courses</h5>
+
+        <a href="{{ url_for('portal') }}" class="btn btn-md-lg btn-lg btn-primary align-self-center text-warning">Get Started</a>
+
+    </div>
+    <div class="col-md-6 text-center align-items-center">
+        <img src="{{ url_for('static', filename='images/homepage.svg') }}" class="img-fluid text-center w-75 w-md-100 mt-4 p-0" alt="homepage image">
+    </div>
+</div>
+
+
+{% endblock %}
+
